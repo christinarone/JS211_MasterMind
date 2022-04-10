@@ -28,13 +28,50 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const generateHint = () =>  {
+const generateHint = (guess) =>  {
   // your code here
+  let hints1 = 0
+  let hints2 = 0
+
+  let guessArray = guess.split("")
+  let solutionArray = solution.split("")
+
+  for(let i = 0; i < guess.length; i++){
+
+    if (guessArray[i] === solutionArray[i]){
+      hints1++
+      guessArray[i]=0
+      solutionArray[i]=1
+    }
+  }
+  
+  for(let i = 0; i < guess.length; i++){
+    for(let j = 0; j < solution.length; j++){
+      if (guessArray[i]=== solutionArray[j]){
+        hints2++
+        guessArray[i]=0
+        solutionArray[j]=1
+      }
+    }
+  }
+  
+  return hints1 + '-' + hints2
 }
 
 const mastermind = (guess) => {
   solution = 'abcd'; // Comment this out to generate a random solution
   // your code here
+  if (guess === solution){
+    console.log('you win')
+    return "You guessed it!"
+  }
+  board.push(guess)
+  generateHint(guess)
+  
+
+
+
+  
 }
 
 
